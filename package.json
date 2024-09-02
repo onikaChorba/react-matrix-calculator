@@ -1,6 +1,6 @@
 {
-  "homepage": "https://onikachorba.github.io/test-deploy-react/",
-  "name": "test-deploy-react",
+  "homepage": "https://onikachorba.github.io/react-matrix-calculator/",
+  "name": "react-matrix-calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
