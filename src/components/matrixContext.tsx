@@ -5,6 +5,7 @@ type TMatrixContext = {
   matrix: Cell[][];
   setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
   updateCellAmount: (rowIndex: number, colIndex: number, amount: number) => void;
+  highlightNearestCells: (rowIndex: number, colIndex: number, x: number) => void
 }
 
 const MatrixContext = createContext<TMatrixContext | undefined>(undefined);
@@ -32,8 +33,27 @@ export const MatrixProvider = ({ children }: { children: ReactNode }) => {
     });
   }
 
+  const highlightNearestCells = (rowIndex: number, colIndex: number, x: number) => {
+    setMatrix(prevMatrix => {
+      const flatCells = prevMatrix.flat();
+      const targetAmount = prevMatrix[rowIndex][colIndex].amount;
+      const sortedCells = flatCells
+        .map(cell => ({ ...cell, giff: Math.abs(cell.amount - targetAmount) }))
+        .sort((a, b) => a.giff - b.giff)
+        .slice(0, x);
+
+      const newMatrix = prevMatrix.map(row =>
+        row.map(cell => ({
+          ...cell,
+          isHighlighted: sortedCells.some(sc => sc.id === cell.id)
+        }))
+      )
+      return newMatrix;
+    });
+  }
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount }}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount, highlightNearestCells }}>
       {children}
     </MatrixContext.Provider>
   )

@@ -1,0 +1,26 @@
+.table {
+  background: rgba(214, 219, 230, 0.3);
+}
+
+.cell {
+  cursor: pointer;
+  min-width: 50px;
+  text-align: center;
+  padding: 10px;
+
+  &.mainRow {
+    font-weight: 700;
+    background: rgba(214, 219, 230, 0.7);
+    color: #333;
+  }
+  &.mainColumn {
+    font-weight: 700;
+    background: rgba(214, 219, 230, 0.7);
+    color: #333;
+  }
+
+  &.isHighlighted {
+    background: rgb(184, 153, 237, 0.3);
+    color: black;
+  }
+}

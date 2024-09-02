@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import './App.scss';
 import { MatrixProvider } from "./components/matrixContext.tsx";
 import { MatrixTable } from "./components/matrixTable.tsx";
 import { MatrixGenerator } from "./components/matrixGenerator.tsx";
 
 export const App = () => {
 
-  const [rows, setRows] = useState(2);
-  const [columns, setColumns] = useState(2);
+  const [rows, setRows] = useState(5);
+  const [columns, setColumns] = useState(5);
 
   return (
     <MatrixProvider>

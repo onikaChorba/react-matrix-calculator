@@ -19,14 +19,16 @@ export const MatrixTable = () => {
   };
 
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
-          <th></th>
+          <th className="cell mainColumn">Cell values</th>
           {matrix[0]?.map((_, indexColumn) => (
-            <th key={indexColumn}> Cell values N ={indexColumn + 1}</th>
+            <th key={indexColumn} className="cell column mainColumn">
+              N ={indexColumn + 1}
+            </th>
           ))}
-          {matrix.length > 0 && <th>Sum values</th>}
+          {matrix.length > 0 && <th className="cell mainColumn">Sum values</th>}
         </tr>
       </thead>
       <tbody>
@@ -35,16 +37,16 @@ export const MatrixTable = () => {
         ))}
         {matrix.length > 0 && (
           <tr>
-            <td>Average values</td>
+            <td className="cell mainRow">Average values</td>
             {matrix[0]?.map((_, colIndex) => (
-              <td key={colIndex}>{calculateAverageColumnsValues(colIndex)}</td>
+              <td key={colIndex} className="cell">{calculateAverageColumnsValues(colIndex)}</td>
             ))}
           </tr>
         )}
         <tr>
-          <td>50th Percentile</td>
+          <td className="cell mainRow">50th Percentile</td>
           {matrix[0]?.map((_, colIndex) => (
-            <td key={colIndex}>{calculateMedian(colIndex)}</td>
+            <td key={colIndex} className="cell">{calculateMedian(colIndex)}</td>
           ))}
         </tr>
       </tbody>
