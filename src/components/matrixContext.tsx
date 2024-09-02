@@ -4,6 +4,7 @@ import { Cell } from "../../types";
 type TMatrixContext = {
   matrix: Cell[][];
   setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
+  updateCellAmount: (rowIndex: number, colIndex: number, amount: number) => void;
 }
 
 const MatrixContext = createContext<TMatrixContext | undefined>(undefined);
@@ -22,8 +23,17 @@ export const MatrixProvider = ({ children }: { children: ReactNode }) => {
 
   const [matrix, setMatrix] = useState<Cell[][]>([]);
 
+  const updateCellAmount = (rowIndex: number, colIndex: number, amount: number) => {
+    setMatrix(prevMatrix => {
+      const newMatrix = [...prevMatrix];
+      const cell = newMatrix[rowIndex][colIndex];
+      newMatrix[rowIndex][colIndex] = { ...cell, amount: cell.amount + amount };
+      return newMatrix;
+    });
+  }
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix }}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount }}>
       {children}
     </MatrixContext.Provider>
   )

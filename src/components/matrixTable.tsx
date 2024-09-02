@@ -12,6 +12,12 @@ export const MatrixTable = () => {
     return average;
   };
 
+  const calculateMedian = (colIndex: number) => {
+    const avarage = calculateAverageColumnsValues(colIndex);
+    const halfavarage = Math.floor(avarage / 2);
+    return halfavarage;
+  };
+
   return (
     <table>
       <thead>
@@ -35,6 +41,12 @@ export const MatrixTable = () => {
             ))}
           </tr>
         )}
+        <tr>
+          <td>50th Percentile</td>
+          {matrix[0]?.map((_, colIndex) => (
+            <td key={colIndex}>{calculateMedian(colIndex)}</td>
+          ))}
+        </tr>
       </tbody>
     </table>
   )
