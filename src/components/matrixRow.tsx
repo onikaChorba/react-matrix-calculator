@@ -26,7 +26,7 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
 
 
   return (
-    <tr className="cells">
+    <tr>
       <td className="cell mainRow"> M = {rowIndex + 1}</td>
       {
         row.map((cell, cellIndex) => (
@@ -42,8 +42,8 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
       }
       <td className="cell" onMouseEnter={handleSumHover}
         onMouseLeave={() => hideRowPercentages(rowIndex)}>{rowSum}</td>
-      <td >
-        <button className="deleteButton" onClick={handleRemoveRow}>x</button>
+      <td>
+        <button className="deleteButton" onClick={handleRemoveRow}>X</button>
       </td>
     </tr>
   )

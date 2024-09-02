@@ -32,7 +32,7 @@ export const MatrixTable = () => {
                   N ={indexColumn + 1}
                 </th>
               ))}
-              <th className="cell mainColumn">Sum values</th>
+              <th className="cell mainColumn" colSpan={2}>Sum values</th>
             </tr>
           </thead>
           <tbody>

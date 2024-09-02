@@ -8,9 +8,6 @@
   background: rgba(214, 219, 230, 0.3);
   border-spacing: 1px;
 }
-.cells {
-  position: relative;
-}
 .cell {
   cursor: pointer;
   min-width: 70px;
@@ -37,10 +34,6 @@
   }
 }
 .deleteButton {
-  position: absolute;
-  top: 50%;
-  right: -25px;
-  transform: translateY(-50%);
   background-color: transparent;
   border: none;
   color: black;
