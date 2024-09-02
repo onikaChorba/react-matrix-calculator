@@ -4,7 +4,7 @@ import { useMatrix } from "./matrixContext.tsx";
 
 export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) => {
 
-  const { updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages } = useMatrix();
+  const { updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages, removeRow } = useMatrix();
 
   const rowSum = row.reduce((sum, cell) => sum + cell.amount, 0);
 
@@ -20,25 +20,31 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
     displayRowPercentages(rowIndex);
   };
 
+  const handleRemoveRow = () => {
+    removeRow(rowIndex);
+  };
+
+
   return (
-    <>
-      <tr>
-        <td className="cell mainRow"> M = {rowIndex + 1}</td>
-        {
-          row.map((cell, cellIndex) => (
-            <td
-              key={cell.id}
-              onClick={() => handleCellClick(cellIndex)}
-              onMouseEnter={() => handleCellHover(cellIndex)}
-              className={`cell ${cell.isHighlighted && "isHighlighted"} ${cell.isPercentage && "isPercentage"}`}
-            >
-              {cell.isPercentage ? `${cell.percentage!.toFixed(2)}%` : cell.amount}
-            </td>
-          ))
-        }
-        <td className="cell" onMouseEnter={handleSumHover}
-          onMouseLeave={() => hideRowPercentages(rowIndex)}>{rowSum}</td>
-      </tr>
-    </>
+    <tr className="cells">
+      <td className="cell mainRow"> M = {rowIndex + 1}</td>
+      {
+        row.map((cell, cellIndex) => (
+          <td
+            key={cell.id}
+            onClick={() => handleCellClick(cellIndex)}
+            onMouseEnter={() => handleCellHover(cellIndex)}
+            className={`cell ${cell.isHighlighted && "isHighlighted"} ${cell.isPercentage && "isPercentage"}`}
+          >
+            {cell.isPercentage ? `${cell.percentage!.toFixed(2)}%` : cell.amount}
+          </td>
+        ))
+      }
+      <td className="cell" onMouseEnter={handleSumHover}
+        onMouseLeave={() => hideRowPercentages(rowIndex)}>{rowSum}</td>
+      <td >
+        <button className="deleteButton" onClick={handleRemoveRow}>x</button>
+      </td>
+    </tr>
   )
 }

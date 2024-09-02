@@ -11,29 +11,33 @@ export const App = () => {
 
   return (
     <MatrixProvider>
-      <h1>Matrix Generator</h1>
-      <div>
-        <label>
-          Rows (M):
-          <input
-            type="number"
-            value={rows}
-            onChange={(e) => setRows(Number(e.target.value))}
-            min={0}
-            max={100} />
-        </label>
-        <label>
-          Columns (N):
-          <input
-            type="number"
-            value={columns}
-            onChange={(e) => setColumns(Number(e.target.value))}
-            min={0}
-            max={100} />
-        </label>
+      <div className="container">
+        <h1>Matrix Generator</h1>
+        <div className="inputsBlock">
+          <label className="label">
+            Rows (M):
+            <input
+              type="number"
+              value={rows}
+              onChange={(e) => setRows(Number(e.target.value))}
+              min={0}
+              max={100}
+              className="inputField" />
+          </label>
+          <label className="label">
+            Columns (N):
+            <input
+              type="number"
+              value={columns}
+              onChange={(e) => setColumns(Number(e.target.value))}
+              min={0}
+              max={100}
+              className="inputField" />
+          </label>
+        </div>
+        <MatrixGenerator rows={rows} columns={columns} />
+        <MatrixTable />
       </div>
-      <MatrixGenerator rows={rows} columns={columns} />
-      <MatrixTable />
     </MatrixProvider>
   )
 }

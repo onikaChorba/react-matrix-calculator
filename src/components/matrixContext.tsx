@@ -8,6 +8,8 @@ type TMatrixContext = {
   highlightNearestCells: (rowIndex: number, colIndex: number, x: number) => void;
   displayRowPercentages: (rowIndex: number) => void;
   hideRowPercentages: (rowIndex: number) => void;
+  addRow: () => void;
+  removeRow: (rowIndex: number) => void;
 }
 
 const MatrixContext = createContext<TMatrixContext | undefined>(undefined);
@@ -85,8 +87,22 @@ export const MatrixProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const addRow = () => {
+    setMatrix(prevMatrix => {
+      const newRow = Array.from({ length: prevMatrix[0]?.length || 0 }, (_, colIndex) => ({
+        id: prevMatrix.flat().length + colIndex,
+        amount: Math.floor(Math.random() * 101),
+      }));
+      return [...prevMatrix, newRow];
+    });
+  };
+
+  const removeRow = (rowIndex: number) => {
+    setMatrix(prevMatrix => prevMatrix.filter((_, rIndex) => rIndex !== rowIndex));
+  };
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages }}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages, addRow, removeRow }}>
       {children}
     </MatrixContext.Provider>
   )
