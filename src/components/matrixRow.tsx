@@ -1,6 +1,9 @@
 import React from "react"
 import { Cell } from "../../types"
 export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) => {
+
+  const rowSum = row.reduce((sum, cell) => sum + cell.amount, 0);
+
   return (
     <>
       <tr>
@@ -12,6 +15,7 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
             </td>
           ))
         }
+        <td>{rowSum}</td>
       </tr>
     </>
   )
