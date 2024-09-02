@@ -5,7 +5,9 @@ type TMatrixContext = {
   matrix: Cell[][];
   setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
   updateCellAmount: (rowIndex: number, colIndex: number, amount: number) => void;
-  highlightNearestCells: (rowIndex: number, colIndex: number, x: number) => void
+  highlightNearestCells: (rowIndex: number, colIndex: number, x: number) => void;
+  displayRowPercentages: (rowIndex: number) => void;
+  hideRowPercentages: (rowIndex: number) => void;
 }
 
 const MatrixContext = createContext<TMatrixContext | undefined>(undefined);
@@ -52,8 +54,39 @@ export const MatrixProvider = ({ children }: { children: ReactNode }) => {
     });
   }
 
+  const displayRowPercentages = (rowIndex: number) => {
+    setMatrix(prevMatrix => {
+      const rowSum = prevMatrix[rowIndex].reduce((sum, cell) => sum + cell.amount, 0);
+      const newMatrix = prevMatrix.map((row, rIndex) =>
+        rIndex === rowIndex
+          ? row.map(cell => ({
+            ...cell,
+            isPercentage: true,
+            percentage: (cell.amount / rowSum) * 100,
+          }))
+          : row
+      );
+      return newMatrix;
+    });
+  }
+
+  const hideRowPercentages = (rowIndex: number) => {
+    setMatrix(prevMatrix => {
+      const newMatrix = prevMatrix.map((row, rIndex) =>
+        rIndex === rowIndex
+          ? row.map(cell => ({
+            ...cell,
+            isPercentage: false,
+            percentage: undefined,
+          }))
+          : row
+      );
+      return newMatrix;
+    });
+  };
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount, highlightNearestCells }}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages }}>
       {children}
     </MatrixContext.Provider>
   )

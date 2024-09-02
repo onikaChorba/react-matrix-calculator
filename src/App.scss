@@ -4,7 +4,7 @@
 
 .cell {
   cursor: pointer;
-  min-width: 50px;
+  min-width: 70px;
   text-align: center;
   padding: 10px;
 
@@ -22,5 +22,8 @@
   &.isHighlighted {
     background: rgb(184, 153, 237, 0.3);
     color: black;
+  }
+  &.isPercentage {
+    background: rgb(184, 153, 237, 0.7);
   }
 }

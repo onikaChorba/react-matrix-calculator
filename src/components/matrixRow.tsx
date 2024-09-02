@@ -4,7 +4,7 @@ import { useMatrix } from "./matrixContext.tsx";
 
 export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) => {
 
-  const { updateCellAmount, highlightNearestCells } = useMatrix();
+  const { updateCellAmount, highlightNearestCells, displayRowPercentages, hideRowPercentages } = useMatrix();
 
   const rowSum = row.reduce((sum, cell) => sum + cell.amount, 0);
 
@@ -16,6 +16,10 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
     highlightNearestCells(rowIndex, colIndex, 5);
   }
 
+  const handleSumHover = () => {
+    displayRowPercentages(rowIndex);
+  };
+
   return (
     <>
       <tr>
@@ -26,13 +30,14 @@ export const MatrixRow = ({ row, rowIndex }: { row: Cell[], rowIndex: number }) 
               key={cell.id}
               onClick={() => handleCellClick(cellIndex)}
               onMouseEnter={() => handleCellHover(cellIndex)}
-              className={`cell ${cell.isHighlighted && "isHighlighted"}`}
+              className={`cell ${cell.isHighlighted && "isHighlighted"} ${cell.isPercentage && "isPercentage"}`}
             >
-              {cell.amount}
+              {cell.isPercentage ? `${cell.percentage!.toFixed(2)}%` : cell.amount}
             </td>
           ))
         }
-        <td className="cell">{rowSum}</td>
+        <td className="cell" onMouseEnter={handleSumHover}
+          onMouseLeave={() => hideRowPercentages(rowIndex)}>{rowSum}</td>
       </tr>
     </>
   )
