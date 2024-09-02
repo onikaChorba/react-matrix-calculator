@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-matrix-calculator/static/css/main.5dd5eaeb.css",
+    "main.js": "/react-matrix-calculator/static/js/main.4643cb65.js",
+    "static/js/511.4241a704.chunk.js": "/react-matrix-calculator/static/js/511.4241a704.chunk.js",
+    "index.html": "/react-matrix-calculator/index.html",
+    "main.5dd5eaeb.css.map": "/react-matrix-calculator/static/css/main.5dd5eaeb.css.map",
+    "main.4643cb65.js.map": "/react-matrix-calculator/static/js/main.4643cb65.js.map",
+    "511.4241a704.chunk.js.map": "/react-matrix-calculator/static/js/511.4241a704.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5dd5eaeb.css",
+    "static/js/main.4643cb65.js"
+  ]
+}
