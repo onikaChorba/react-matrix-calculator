@@ -18,10 +18,13 @@ const generateMatrix = (rows: number, columns: number) => {
 export const MatrixGenerator = ({ rows, columns }: { rows: number, columns: number }) => {
 
   const { setMatrix } = useMatrix();
+
   useEffect(() => {
-    const newMatrix = generateMatrix(rows, columns);
-    setMatrix(newMatrix);
-  }, [rows, columns, setMatrix])
+    if (rows > 0 && columns > 0) {
+      const newMatrix = generateMatrix(rows, columns);
+      setMatrix(newMatrix);
+    }
+  }, [rows, columns, setMatrix]);
 
   return null
 }

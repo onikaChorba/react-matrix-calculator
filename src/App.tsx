@@ -36,7 +36,7 @@ export const App = () => {
           </label>
         </div>
         <MatrixGenerator rows={rows} columns={columns} />
-        <MatrixTable />
+        <MatrixTable setRows={setRows} />
       </div>
     </MatrixProvider>
   )

@@ -1,9 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useMatrix } from "./matrixContext.tsx";
 import { MatrixRow } from "./matrixRow.tsx";
-export const MatrixTable = () => {
+export const MatrixTable = ({ setRows }: { setRows: React.Dispatch<React.SetStateAction<number>> }) => {
 
   const { matrix, addRow } = useMatrix();
+
+  useEffect(() => {
+    setRows(matrix.length);
+  }, [matrix.length, setRows]);
 
   const calculateAverageColumnsValues = (colIndex: number) => {
     const column = matrix.map(row => row[colIndex].amount);
